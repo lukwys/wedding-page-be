@@ -1,2 +1,7 @@
 [build]
-    functions = "functions"
+  functions = "functions" # Zmienione na inny folder niż źródłowy
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
