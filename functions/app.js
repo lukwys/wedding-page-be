@@ -2,6 +2,7 @@ const express = require("express");
 const serverless = require("serverless-http");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+const cors = require('cors');
 
 dotenv.config();
 
@@ -23,12 +24,11 @@ const router = express.Router();
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://slub-wysoccy.pl/'],
+  methods: ['POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 router.get("/", (req, res) => {
   res.send("App is running..");
